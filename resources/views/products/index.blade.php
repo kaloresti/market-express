@@ -35,11 +35,28 @@
                 <div class="card-header"><i class="fa fa-table"></i> Lista de produtos</div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>produto</th>
+                                <th>matricula</th>
+                                <th>preço</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($products as $product)
+                                <tr>
+                                    <td>{{$product->name}}</td>
+                                    <td>{{$product->code}}</td>
+                                    <td>{{$product->price}}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3">Nenhum produto cadastrado até agora. <a href="/products/create">clique aqui</a> para começar</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

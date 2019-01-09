@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductController extends Controller
 {
+    protected $product;
+
     /**
      * Create a new controller instance.
      *
@@ -14,6 +17,7 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->product = new Product();
     }
     
     /**
@@ -23,7 +27,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('products.index');
+        $products = $this->product->all();
+        return view('products.index', compact('products'));
     }
 
     public function create()
